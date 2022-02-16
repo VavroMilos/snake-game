@@ -1,27 +1,17 @@
-//! listeners
+//! Get Keys
 document.addEventListener("keydown", keyPush);
 
-//! canvas
+//! Get Canvas
 const canvas = document.querySelector('canvas');
 const title = document.querySelector('h1');
 const ctx = canvas.getContext('2d');
 
-//! player
+//! Main
 let gameIsRunning = true;
-
-const snakeSize = 50;
-
-let snakeSpeed = snakeSize;
-let snakePosX = 0;
-let snakePosY = canvas.height / 2;
-
 const fps = 10;
 
-let velocityX = 1;
-let velocityY = 0;
-
-let foodPosX = 0;
-let foodPosY = 0;
+const snakeSize = 50;
+const snakeSpeed = snakeSize;
 
 let tail = []
 let snakeLength = 2;
@@ -31,18 +21,28 @@ let score = 0;
 const tileCountX = canvas.width / snakeSize;
 const tileCountY = canvas.height / snakeSize;
 
-//! loop
+let snakePosX = 0;
+let snakePosY = canvas.height / 2;
+
+let velocityX = 1;
+let velocityY = 0;
+
+let foodPosX = 0;
+let foodPosY = 0;
+
+//! Game Function
 function gameLoop() { 
     if (gameIsRunning) {
-        drawStuff() 
+        drawStuff()
         moveStuff()
-        setTimeout(gameLoop, 1000 / fps);    
-    }          
+        setTimeout(gameLoop, 1000 / fps);
+    }        
 }
 resetFood();
 gameLoop();
 
-//! move
+
+//! Function Move Stuff
 function moveStuff() {
     snakePosX += snakeSpeed * velocityX;
     snakePosY += snakeSpeed * velocityY;
@@ -77,26 +77,28 @@ function moveStuff() {
     }
 }
 
-//! draw
+//! Function Draw Stuff
 function drawStuff() {
+
     rectangle("lightblue", 0, 0, canvas.width, canvas.height)
 
     drawGrid()
 
     drawTail()
-    
+
     rectangle("yellowgreen", foodPosX, foodPosY, snakeSize, snakeSize)
 
     rectangle("black", snakePosX, snakePosY, snakeSize, snakeSize)
+    
 }
 
-//! draw rectangle
+//! Drawing Rectangles
 function rectangle(color, x, y, width, height) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
 }
 
-//! keyboard
+//! Buttons for moving
 function keyPush(event) {
     switch(event.key) {
         case "ArrowLeft":
@@ -123,6 +125,7 @@ function keyPush(event) {
                 velocityY = 1;
             }
             break;
+
         default:    
             if (!gameIsRunning) {
                 location.reload()
@@ -131,7 +134,7 @@ function keyPush(event) {
     }
 }
 
-//! draw grid 
+//! Drawing Grid
 function drawGrid() {
     for (let i = 0; i < tileCountX; i++) {
         for (let j = 0; j < tileCountY; j++) {
@@ -140,30 +143,30 @@ function drawGrid() {
     }
 }
 
-//! random food spawn
+//! Random Food Spawning
 function resetFood() {
     foodPosX = Math.floor(Math.random() * tileCountX) * snakeSize;
     foodPosY = Math.floor(Math.random() * tileCountY) * snakeSize; 
 }
 
-//! update score
+//! Updating Score 
 function updateScore() {
     title.textContent = ++score;    
 }
 
-//! draw tail
+//! Drawing Snake Tail
 function drawTail() {
     tail.forEach(snakePart => 
         rectangle("gray", snakePart.x, snakePart.y, snakeSize, snakeSize)  
     )
 }
 
-//! update snake
+//! Adding Tail To Snake
 function updateSnake() {
     snakeLength++;
 }
 
-//! game over
+//! GAME OVER
 function gameOver() {
     gameIsRunning = false;
 }
