@@ -1,7 +1,14 @@
 body {
     background-color: lightblue;
+    justify-content: center;
+    display: flex;
 }
 
 canvas {
+    margin-top: 5%;
     border: 10px solid lightcoral;
+}
+
+h1 {
+    margin-left: 48%;
 }
