@@ -1,4 +1,5 @@
 body {
+    cursor: default;
     background-color: lightblue;
     justify-content: center;
     display: flex;
@@ -10,5 +11,13 @@ canvas {
 }
 
 h1 {
-    margin-left: 48%;
+    justify-content: center;
+    display: flex;
+    transform: scale(1.0);
+}
+
+h3 {
+    justify-content: center;
+    text-decoration: underline;
+    display: none;
 }

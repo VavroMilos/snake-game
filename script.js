@@ -169,4 +169,6 @@ function updateSnake() {
 //! GAME OVER
 function gameOver() {
     gameIsRunning = false;
+    document.getElementById("game-over").style.display = "flex";
+    document.getElementById("score").style.transform = "scale(1.3)";
 }
