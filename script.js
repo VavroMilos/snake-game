@@ -3,7 +3,7 @@ document.addEventListener("keydown", keyPush);
 
 //! Get Canvas
 const canvas = document.querySelector('canvas');
-const title = document.querySelector('h1');
+const title = document.getElementById("score");
 const ctx = canvas.getContext('2d');
 
 //! Main
@@ -18,7 +18,7 @@ let snakeLength = 2;
 
 let score = 0;
 
-const tileCountX = canvas.width / snakeSize;
+const tileCountX = canvas.height / snakeSize;
 const tileCountY = canvas.height / snakeSize;
 
 let snakePosX = 0;
@@ -80,15 +80,15 @@ function moveStuff() {
 //! Function Draw Stuff
 function drawStuff() {
 
-    rectangle("lightblue", 0, 0, canvas.width, canvas.height)
+    rectangle("#202020", 0, 0, canvas.width, canvas.height)
 
     drawGrid()
 
     drawTail()
 
-    rectangle("yellowgreen", foodPosX, foodPosY, snakeSize, snakeSize)
+    rectangle("red", foodPosX, foodPosY, snakeSize, snakeSize)
 
-    rectangle("black", snakePosX, snakePosY, snakeSize, snakeSize)
+    rectangle("#009427", snakePosX, snakePosY, snakeSize, snakeSize)
     
 }
 
@@ -138,7 +138,7 @@ function keyPush(event) {
 function drawGrid() {
     for (let i = 0; i < tileCountX; i++) {
         for (let j = 0; j < tileCountY; j++) {
-            rectangle("white", snakeSize * i, snakeSize * j, snakeSize - 1, snakeSize -1);
+            rectangle("#f0e7dc", snakeSize * i, snakeSize * j, snakeSize - 0.3, snakeSize -0.3);
         } 
     }
 }
@@ -147,6 +147,18 @@ function drawGrid() {
 function resetFood() {
     foodPosX = Math.floor(Math.random() * tileCountX) * snakeSize;
     foodPosY = Math.floor(Math.random() * tileCountY) * snakeSize; 
+
+    if (foodPosX === snakePosX && foodPosY === snakePosY) {
+        resetFood();
+    }
+
+    if (
+        tail.some(
+            (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
+        )
+    ) {
+        resetFood();
+    }
 }
 
 //! Updating Score 
@@ -157,7 +169,7 @@ function updateScore() {
 //! Drawing Snake Tail
 function drawTail() {
     tail.forEach(snakePart => 
-        rectangle("gray", snakePart.x, snakePart.y, snakeSize, snakeSize)  
+        rectangle("#09cc09", snakePart.x, snakePart.y, snakeSize, snakeSize)  
     )
 }
 

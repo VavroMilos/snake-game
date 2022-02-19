@@ -1,23 +1,31 @@
-body {
+* {
     cursor: default;
-    background-color: lightblue;
-    justify-content: center;
-    display: flex;
+}
+
+:root {
+    --color: white;
+    --background-color: #202020;
+    --canvas-border: #fbd291;
+}
+
+#container {
+    display: grid;
+    place-items: center;
+}
+
+#heading {
+    font-size: 3.5rem;
+}
+
+#game-over {
+    display: none;
+}
+
+body {
+    color: var(--color);
+    background-color: var(--background-color);
 }
 
 canvas {
-    margin-top: 5%;
-    border: 10px solid lightcoral;
-}
-
-h1 {
-    justify-content: center;
-    display: flex;
-    transform: scale(1.0);
-}
-
-h3 {
-    justify-content: center;
-    text-decoration: underline;
-    display: none;
+    border: 0.5rem solid var(--canvas-border);
 }
